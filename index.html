@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ford Nexus em 8 passos</title>
+<meta name="description" content="Demonstração guiada: do carro que ninguém mais chama até o resultado em doze meses. Projeto acadêmico FIAP — dados simulados.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#060C22">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ford Nexus em 8 passos">
+<meta property="og:description" content="Demonstração guiada de uma camada de dados para o pós-venda. Projeto acadêmico FIAP — dados simulados.">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect width='26' height='26' rx='6' fill='%23060C22'/%3E%3Ccircle cx='13' cy='13' r='8' fill='none' stroke='%235AA5F7' stroke-width='1.6' opacity='.5'/%3E%3Ccircle cx='13' cy='5.2' r='2.6' fill='%235AA5F7'/%3E%3Ccircle cx='19.8' cy='16.8' r='2.6' fill='%231273EC'/%3E%3Ccircle cx='6.2' cy='16.8' r='2.6' fill='%231273EC'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/demo.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="mark">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="10" fill="none" stroke="#5AA5F7" stroke-width="1.6" opacity=".5"/>
+        <circle cx="13" cy="3.6" r="3.1" fill="#5AA5F7"/>
+        <circle cx="21.1" cy="17.7" r="3.1" fill="#1273EC"/>
+        <circle cx="4.9" cy="17.7" r="3.1" fill="#1273EC"/>
+      </svg>
+      <span><b>Ford Nexus</b> <span>· demonstração em 8 passos</span></span>
+    </div>
+    <span class="tagd">Protótipo · dados simulados</span>
+    <nav class="steps" id="dots" aria-label="Passos"></nav>
+  </header>
+
+  <main class="stage">
+
+    <!-- 1 -->
+    <section class="step on" id="s1">
+      <div class="kicker">Passo 1 · o cliente</div>
+      <h2>Tem uma Ranger que ninguém mais chama.</h2>
+      <p class="lede">O Rafael comprou a Ranger zero numa concessionária Ford de Sorocaba. Três anos depois, ele faz a revisão numa oficina de picape do bairro — não porque quis, mas porque <b>a loja onde ele comprou fechou.</b></p>
+      <div class="after card">
+        <div class="carcard">
+          <span class="icon" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#5AA5F7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 13l1.8-5.1A2 2 0 0 1 6.7 6.5h10.6a2 2 0 0 1 1.9 1.4L21 13v5h-2.5"/><path d="M3 18v-5"/><path d="M6.5 18h11"/>
+              <circle cx="6.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/><path d="M3 13h18"/>
+            </svg>
+          </span>
+          <div>
+            <h3>Rafael M. · Ranger XLS 2.2 4x4 2022</h3>
+            <p>Votorantim, região de Sorocaba · comprada zero numa Ford</p>
+          </div>
+        </div>
+        <div class="facts">
+          <div class="fact"><div class="k">Rodou até hoje</div><div class="v">68.400 km</div></div>
+          <div class="fact"><div class="k">Última vez numa Ford</div><div class="v warn">há 13 meses</div></div>
+          <div class="fact"><div class="k">Revisão vencida há</div><div class="v warn">96 dias</div></div>
+          <div class="fact"><div class="k">Loja mais próxima</div><div class="v">38 km</div></div>
+        </div>
+      </div>
+      <p class="foot-note">A Ford vende hoje no Brasil Ranger, Territory, Bronco Sport e Maverick — picapes e SUVs de ticket alto, que geram as revisões mais caras e os clientes que voltam para comprar de novo. E existem só 120 concessionárias para atender 3,8 milhões de Fords rodando no país.</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="step" id="s2">
+      <div class="kicker">Passo 2 · o que já se sabe</div>
+      <h2>A Ford já tem tudo sobre essa picape. Só está tudo separado.</h2>
+      <p class="lede">Cada visita virou uma linha solta no sistema de uma loja. Juntas, elas dizem exatamente o que esse carro precisa hoje. <b>Nenhum dado novo precisa ser coletado.</b></p>
+      <div class="after card">
+        <ul class="tl">
+          <li><span class="when">mai/2023</span><span class="m"><i></i></span><span><span class="what">Revisão de 10 mil km</span><span class="where">Ford Sorocaba · 12.800 km</span></span><span class="val">R$ 890</span></li>
+          <li><span class="when">jan/2024</span><span class="m"><i></i></span><span><span class="what">Revisão de 30 mil km</span><span class="where">Ford Sorocaba · 29.400 km</span></span><span class="val">R$ 1.640</span></li>
+          <li><span class="when">ago/2024</span><span class="m"><i></i></span><span><span class="what">Revisão de 50 mil km e troca de freios</span><span class="where">Ford Sorocaba · 47.100 km</span></span><span class="val">R$ 2.180</span></li>
+          <li class="due"><span class="when">hoje</span><span class="m"><i></i></span><span><span class="what">Revisão de 70 mil km — óleo, quatro filtros e cambagem</span><span class="where">vencida há 96 dias · a Ranger pede revisão a cada 10 mil km ou 12 meses</span></span><span class="val">a fazer</span></li>
+        </ul>
+      </div>
+      <p class="foot-note">Picape roda quase o dobro de um carro de passeio: cerca de 22 mil km por ano. Cruzando esse ritmo com a data da última visita, dá para saber em que mês a próxima revisão vence — sem precisar perguntar nada ao dono.</p>
+    </section>
+
+    <!-- 3 -->
+    <section class="step" id="s3">
+      <div class="kicker">Passo 3 · quem chamar</div>
+      <h2>Toda manhã, a loja recebe a lista pronta.</h2>
+      <p class="lede">Não é a lista inteira de clientes. São os carros que <b>precisam agora</b> e que <b>rendem para a oficina</b>, nessa ordem. O Ricardo é o primeiro da lista de hoje.</p>
+      <div class="after qlist">
+        <div class="qi first"><span class="p">1</span><span><span class="nm">Rafael M. · Ranger XLS 2022</span><span class="rz">revisão vencida há 96 dias · peça no estoque</span></span><span class="sc">94</span></div>
+        <div class="qi"><span class="p">2</span><span><span class="nm">Camila F. · Ranger Storm 2021</span><span class="rz">filtro de escape saturado · risco de perder potência</span></span><span class="sc">91</span></div>
+        <div class="qi"><span class="p">3</span><span><span class="nm">Jorge A. · Territory Titanium 2021</span><span class="rz">revisão de 60 mil km · serviço de R$ 1.620</span></span><span class="sc">89</span></div>
+        <div class="qi"><span class="p">4</span><span><span class="nm">Aline R. · Maverick Lariat 2023</span><span class="rz">revisão de 30 mil km · cliente novo na marca</span></span><span class="sc">86</span></div>
+        <div class="qi"><span class="p">5</span><span><span class="nm">Eduardo S. · Bronco Sport 2022</span><span class="rz">revisão de 40 mil km · sumiu há 15 meses</span></span><span class="sc">82</span></div>
+      </div>
+      <p class="foot-note">A nota de 0 a 100 soma quatro coisas: o quanto a revisão está atrasada, quanto o serviço rende para a oficina, a chance de a pessoa aceitar e se a peça está disponível. Picape e SUV sobem na lista porque rendem mais e o dono volta para comprar outro.</p>
+    </section>
+
+    <!-- 4 -->
+    <section class="step" id="s4">
+      <div class="kicker">Passo 4 · por quanto</div>
+      <h2>O preço vai fechado, antes da conversa começar.</h2>
+      <p class="lede">O sistema sabe quanto a oficina de picape do bairro cobra pela mesma revisão. A oferta sai <b>abaixo da tabela da loja</b> e ainda um pouco acima do independente — e essa diferença tem nome.</p>
+      <div class="after prices">
+        <div class="pc"><div class="k">Tabela da loja</div><div class="v">R$ 2.480</div><div class="s">é o que ele pagaria indo na loja sem falar com ninguém antes</div></div>
+        <div class="pc"><div class="k">Oficina de picape do bairro</div><div class="v">R$ 1.890</div><div class="s">peça de linha, sem garantia da marca, sem registro no carro</div></div>
+        <div class="pc win"><div class="k">A oferta que ele recebe</div><div class="v">R$ 2.190</div><div class="s">peça original, 12 meses de garantia e o serviço registrado no chassi</div></div>
+      </div>
+      <p class="foot-note">45% dos donos de carro dizem estar insatisfeitos com a concessionária, e o motivo número um é custo inesperado. Numa revisão de picape, onde a conta passa de R$ 2 mil, essa insegurança pesa ainda mais — e preço fechado antes da conversa é o que a resolve.</p>
+    </section>
+
+    <!-- 5 -->
+    <section class="step" id="s5">
+      <div class="kicker">Passo 5 · em que dia</div>
+      <h2>O horário oferecido é onde tem elevador vazio e peça pronta.</h2>
+      <div class="two after">
+        <div>
+          <p class="lede" style="margin-top:0">Terça de manhã a oficina está pela metade. A hora do elevador custa a mesma coisa cheia ou vazia — <b>parada, ela simplesmente vence.</b></p>
+          <div class="card" style="margin-top:20px">
+            <div style="display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+              <div><div style="font-size:15px;font-weight:500">Kit de revisão 70 mil km · Ranger 2.2</div>
+              <div style="font-size:13px;color:var(--ink-3);margin-top:3px">óleo, filtro de óleo, ar, combustível e cabine · 3 kits na prateleira</div></div>
+              <span class="pill ok">No estoque</span>
+            </div>
+          </div>
+          <p class="foot-note" style="margin-top:18px">Quando a peça não está na loja, ela leva 3 dias para chegar. Por isso o pedido sai antes de o cliente confirmar: o trânsito acontece enquanto o carro ainda está na rua, e não com ele parado na oficina.</p>
+        </div>
+        <div>
+          <div class="week" id="week"></div>
+          <p class="foot-note" style="margin-top:18px">A oferta vai propor <b style="color:var(--ink)">terça, 09:30</b> — o buraco mais próximo com a peça garantida.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="step" id="s6">
+      <div class="kicker">Passo 6 · a conversa</div>
+      <h2>Ele recebe no WhatsApp que já usa todo dia.</h2>
+      <div class="two after">
+        <div class="phone">
+          <div class="pt"><div class="pav">FN</div><div><b>Ford Sorocaba — Serviços</b><span>conta comercial verificada</span></div></div>
+          <div class="pb" id="chat"></div>
+        </div>
+        <div>
+          <p class="lede" style="margin-top:0">Nenhum aplicativo para instalar, nenhum cadastro. A conversa é a parte visível — <b>tudo o que apareceu nos passos anteriores já tinha sido decidido antes de a primeira mensagem sair.</b></p>
+          <p class="foot-note">O agente marca horário, oferece preço aprovado e remarca quem faltou. Ele não diagnostica, não promete prazo de reparo e não fala com quem pediu para não ser contatado — isso fica com o mecânico e com as regras da loja.</p>
+          <p class="foot-note">97% dos brasileiros abrem o WhatsApp todos os dias. Um aplicativo novo é aberto por 4% das pessoas trinta dias depois de instalado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="step" id="s7">
+      <div class="kicker">Passo 7 · o que mudou</div>
+      <h2>Uma Ranger voltou — e a terça ficou mais cheia.</h2>
+      <p class="lede">Parece pouco olhando um cliente. É exatamente por isso que precisa ser automático: <b>a mesma conversa acontece com centenas de carros por semana, em todas as lojas ao mesmo tempo.</b></p>
+      <div class="after deltas">
+        <div class="dl-card"><div class="k">Oficina na terça</div><div class="v"><em>61%</em></div><div class="from">estava em 52% de ocupação</div></div>
+        <div class="dl-card"><div class="k">Serviço faturado</div><div class="v">R$ 2.190</div><div class="from">que iria para a oficina do bairro</div></div>
+        <div class="dl-card"><div class="k">Custo para conseguir isso</div><div class="v">R$ 66</div><div class="from">3% do serviço, só quando a loja fatura</div></div>
+        <div class="dl-card"><div class="k">Histórico do carro</div><div class="v"><em>+1</em></div><div class="from">registro a mais no chassi da Ranger</div></div>
+      </div>
+      <p class="foot-note">A Ranger do Rafael é 2022, e picape costuma ser trocada entre o quarto e o quinto ano. Ele entra na janela de recompra no ano que vem — e quem manteve o histórico dentro da rede é exatamente quem a Ford consegue chamar primeiro, pelo nome, com o valor de troca já calculado.</p>
+    </section>
+
+    <!-- 8 -->
+    <section class="step tight" id="s8">
+      <div class="kicker">Passo 8 · em doze meses</div>
+      <h2>De cada R$ 10 de manutenção, quantos ficam na Ford?</h2>
+      <p class="lede">Hoje são cerca de <b>R$ 3</b>. O resto vai para oficina independente. Com o Nexus rodando por um ano na simulação, sobe para <b>R$ 4,20</b> — e o grupo sem contato ficou onde estava. Em picape, cada ponto desses vale três vezes mais.</p>
+      <div class="after card">
+        <div class="legend">
+          <span class="lg"><i style="background:var(--s-a)"></i>Clientes que receberam as ofertas</span>
+          <span class="lg"><i style="background:var(--s-b)"></i>Grupo que não recebeu nada</span>
+        </div>
+        <div class="chartbox"><div id="chart"></div><div class="tip" id="tip"></div></div>
+      </div>
+      <p class="foot-note">Deixar 10% da base sem contato é o que prova que o ganho veio da ferramenta, e não da época do ano. Valores simulados a partir das nossas premissas, declaradas como premissa.</p>
+      <div class="endlinks">
+        <button class="go" id="restart">Ver de novo desde o começo</button>
+        <a href="painel.html">Abrir o painel completo, com todos os detalhes →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="nav">
+    <button class="back" id="back" disabled>← Voltar</button>
+    <button class="go" id="next">Continuar</button>
+    <span class="count" id="count">Passo 1 de 8</span>
+    <span class="keys">Use <kbd>→</kbd> e <kbd>←</kbd> para navegar</span>
+  </nav>
+</div>
+
+<script src="assets/demo.js"></script>
+</body>
+</html>

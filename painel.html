@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ford Nexus — painel completo</title>
+<meta name="description" content="Protótipo de console de pós-venda: fila do dia por urgência técnica, motor de preço regional, reserva antecipada de peça e prova de service share com grupo de controle. Projeto acadêmico FIAP — dados simulados.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#060C22">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ford Nexus Console">
+<meta property="og:description" content="Protótipo de console de pós-venda operado por dados. Projeto acadêmico FIAP — dados simulados.">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Crect width='26' height='26' rx='6' fill='%23060C22'/%3E%3Ccircle cx='13' cy='13' r='8' fill='none' stroke='%234D9BF5' stroke-width='1.6' opacity='.5'/%3E%3Ccircle cx='13' cy='5.2' r='2.6' fill='%234D9BF5'/%3E%3Ccircle cx='19.8' cy='16.8' r='2.6' fill='%231273EC'/%3E%3Ccircle cx='6.2' cy='16.8' r='2.6' fill='%231273EC'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="10" fill="none" stroke="#4D9BF5" stroke-width="1.6" opacity=".5"/>
+        <circle cx="13" cy="3.6" r="3.1" fill="#4D9BF5"/>
+        <circle cx="21.1" cy="17.7" r="3.1" fill="#1273EC"/>
+        <circle cx="4.9" cy="17.7" r="3.1" fill="#1273EC"/>
+      </svg>
+      <span><b>Ford Nexus</b><span>Console de pós-venda</span></span>
+    </div>
+
+    <nav class="nav" aria-label="Seções">
+      <div class="nav-label">Operação</div>
+      <button data-view="fila" aria-current="true"><i class="dot"></i>Fila do dia<em class="badge num" id="navQueueCount">10</em></button>
+      <button data-view="conversa"><i class="dot"></i>Conversa</button>
+      <button data-view="oficina"><i class="dot"></i>Oficina</button>
+      <div class="nav-label" style="padding-top:14px">Rede &amp; prova</div>
+      <button data-view="rede"><i class="dot"></i>Rede certificada</button>
+      <button data-view="prova"><i class="dot"></i>Service share</button>
+    </nav>
+
+    <div class="rail-foot">
+      <a class="rail-link" href="index.html">← Demonstração guiada</a>
+      <p class="demo-chip">Protótipo · dados simulados<br>Desafio Ford × FIAP</p>
+      <button class="reset" id="resetBtn">↺ Reiniciar demonstração</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <div class="who">
+        <b>Ford Sorocaba — Zona Norte</b>
+        <span>Terça, 15 de setembro · 08:12 · 6 elevadores</span>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><div class="k">Service share</div><div class="v num" id="kShare">38,6%</div><div class="d mono" id="kShareD">+7,4 p.p. vs controle</div></div>
+        <div class="kpi"><div class="k">Ocupação semana</div><div class="v num" id="kOcc">64%</div><div class="d mono">meta 85%</div></div>
+        <div class="kpi"><div class="k">OS recuperadas</div><div class="v num" id="kOs">312</div><div class="d mono">no mês</div></div>
+        <div class="kpi"><div class="k">Receita recuperada</div><div class="v num" id="kRev">R$ 214 mil</div><div class="d mono" id="kRevD">custo 3% da OS</div></div>
+      </div>
+    </header>
+
+    <!-- ============ FILA ============ -->
+    <section class="view on" id="v-fila">
+      <div class="vh">
+        <div class="eyebrow">Motor 1 · quem chamar</div>
+        <h2>A fila do dia, ordenada por urgência técnica e valor — não por cadastro.</h2>
+        <p>O motor lê as ordens de serviço do DMS, cruza com o intervalo do manual, a quilometragem estimada e o histórico do modelo. Clique num veículo para ver a decisão por trás da posição.</p>
+      </div>
+
+      <div class="cols">
+        <div class="panel">
+          <div class="panel-h">
+            <h3>Fila priorizada</h3>
+            <span class="src">DMS · CRM</span>
+            <span class="sub" id="queueMeta">10 veículos · atualizada 08:05</span>
+          </div>
+          <ul class="q" id="queue"></ul>
+        </div>
+
+        <div class="panel" id="detail"></div>
+      </div>
+    </section>
+
+    <!-- ============ CONVERSA ============ -->
+    <section class="view" id="v-conversa">
+      <div class="vh">
+        <div class="eyebrow">A camada visível</div>
+        <h2>A conversa sai no WhatsApp que o cliente já usa. A decisão veio de antes.</h2>
+        <p>Nenhum aplicativo para instalar. A oferta já chega com serviço, preço fechado e horário em que a peça existe — por isso não há "custo inesperado" depois.</p>
+      </div>
+      <div class="chat-wrap">
+        <div class="phone">
+          <div class="ph-top">
+            <div class="ph-av">FN</div>
+            <div><b>Ford Sorocaba — Serviços</b><span>conta comercial verificada</span></div>
+          </div>
+          <div class="ph-body" id="chat"></div>
+          <div class="ph-foot" id="chatFoot">Selecione um veículo na fila para gerar a oferta.</div>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h3>O que o agente pode e não pode fazer</h3><span class="src">Regras</span></div>
+          <div class="dbody">
+            <ul class="tl" id="rules">
+              <li><span class="d mono">Pode</span><span class="m"><i></i></span><span><b>Oferecer preço fechado</b><span class="s">dentro da faixa aprovada pela concessionária para aquele serviço e região</span></span><span class="val"></span></li>
+              <li><span class="d mono">Pode</span><span class="m"><i></i></span><span><b>Negociar horário</b><span class="s">apenas em janelas com elevador livre e peça disponível na data</span></span><span class="val"></span></li>
+              <li><span class="d mono">Pode</span><span class="m"><i></i></span><span><b>Remarcar e recuperar falta</b><span class="s">até duas tentativas, respeitando o opt-out registrado no consentimento</span></span><span class="val"></span></li>
+              <li><span class="d mono">Não pode</span><span class="m out"><i></i></span><span><b>Diagnosticar ou prometer prazo de reparo</b><span class="s">diagnóstico é do mecânico certificado; o agente marca, não avalia</span></span><span class="val"></span></li>
+              <li><span class="d mono">Não pode</span><span class="m out"><i></i></span><span><b>Contatar quem não consentiu</b><span class="s">consentimento granular preso ao VIN, revogável na própria conversa</span></span><span class="val"></span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OFICINA ============ -->
+    <section class="view" id="v-oficina">
+      <div class="vh">
+        <div class="eyebrow">Motores 2 e 3 · quando e com que peça</div>
+        <h2>O elevador vazio é capacidade que vence no fim do dia.</h2>
+        <p>O otimizador trata a agenda como estoque perecível: encaixa o cliente certo no buraco certo e dispara a peça antes da confirmação, para que o trânsito de 3 dias aconteça enquanto o carro ainda está na rua.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:16px">
+        <div class="panel-h"><h3>Agenda da semana</h3><span class="src">DMS · capacidade</span><span class="sub" id="occMeta">ocupação média 64% · meta 85%</span></div>
+        <div class="dbody"><div class="week" id="week"></div></div>
+        <p class="notes">O buraco de terça de manhã é o alvo do motor de agenda: é onde a hora de elevador custa o mesmo e rende zero. Cada confirmação preenche primeiro o vale, não a segunda-feira que já está cheia.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-h"><h3>Peças pré-posicionadas</h3><span class="src">Estoque · giro</span></div>
+          <div class="tscroll"><table class="wtable">
+            <thead><tr><th>Peça</th><th>Código</th><th>Situação</th><th style="text-align:right">Para</th></tr></thead>
+            <tbody id="partsTable"></tbody>
+          </table></div>
+          <p class="notes">A reserva é disparada pela previsão de agendamento, não pela confirmação. Se o cliente não fechar, a peça volta para o giro normal em 5 dias — o risco é de estoque, não de venda perdida.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-h"><h3>Ocupação por dia</h3><span class="src">Horas de elevador</span></div>
+          <div class="chart-wrap"><div id="occChart"></div></div>
+          <p class="notes">Horas vendidas sobre horas disponíveis, seis elevadores. A linha tracejada é a meta de 85% acordada com a concessionária no piloto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REDE ============ -->
+    <section class="view" id="v-rede">
+      <div class="vh">
+        <div class="eyebrow">V2 · onde não há mais loja</div>
+        <h2>A certificação é do mecânico. A oficina é só o endereço onde ele trabalha.</h2>
+        <p>Nos bairros sem concessionária, o padrão técnico Ford continua sendo o produto: mecânico treinado e aprovado pela marca, peça genuína, checklist e preço tabelado. Cada serviço volta para o mesmo registro de chassi.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-h"><h3>Rede na região de Sorocaba</h3><span class="src">Cadastro</span><span class="sub">6 pontos · raio 45 km</span></div>
+          <div class="tscroll"><table class="wtable">
+            <thead><tr><th>Oficina · bairro</th><th>Mecânicos certificados</th><th>OS no mês</th><th>Situação</th></tr></thead>
+            <tbody id="netTable"></tbody>
+          </table></div>
+          <p class="notes">A concessionária da região é a distribuidora de peça genuína desses pontos e participa da receita — troca um serviço simples que já havia perdido por volume de peça que hoje não enxerga.</p>
+        </div>
+
+        <div class="panel">
+          <div class="panel-h"><h3>Checklist de certificação</h3><span class="src">Padrão Ford</span></div>
+          <div class="dbody">
+            <ul class="tl" id="certList"></ul>
+          </div>
+          <p class="notes">Sem os cinco itens, o ponto não recebe selo e o serviço feito nele não entra no histórico do chassi. A auditoria é trimestral e amostral.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROVA ============ -->
+    <section class="view" id="v-prova">
+      <div class="vh">
+        <div class="eyebrow">A prova</div>
+        <h2>Service share medido por coorte de chassi, contra um grupo que não recebe nada.</h2>
+        <p>10% da base é sorteada e fica sem contato durante todo o piloto. Sem esse holdout, qualquer alta de receita poderia ser sazonalidade — e não prova nada.</p>
+      </div>
+
+      <div class="panel" style="margin-bottom:16px">
+        <div class="panel-h">
+          <h3>Service share por coorte · 12 meses</h3>
+          <span class="src">Simulação</span>
+          <span class="sub">% das manutenções do carro feitas dentro da rede Ford</span>
+        </div>
+        <div class="legend">
+          <span class="lg"><i style="background:var(--s-nexus)"></i>Grupo Nexus (n = 9.400 chassis)</span>
+          <span class="lg"><i style="background:var(--s-control)"></i>Grupo de controle (n = 1.045, sem contato)</span>
+        </div>
+        <div class="chart-wrap"><div id="shareChart"></div><div class="tip" id="tip"></div></div>
+        <p class="notes">Resultado simulado a partir das premissas do modelo — não é medição de campo. A meta contratada no piloto é de +8 p.p. em 12 meses; a simulação chega a +10,9 p.p. As premissas de ticket (R$ 600) e frequência (1,5 manutenção/ano) são nossas e estão declaradas como premissa.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-h"><h3>Leitura do piloto aos 12 meses</h3><span class="src">Coorte</span></div>
+          <div class="tscroll"><table class="wtable">
+            <thead><tr><th>Indicador</th><th style="text-align:right">Nexus</th><th style="text-align:right">Controle</th><th style="text-align:right">Delta</th></tr></thead>
+            <tbody id="abTable"></tbody>
+          </table></div>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h3>O que ainda pode derrubar isso</h3><span class="src">Riscos</span></div>
+          <div class="dbody"><ul class="tl" id="riskList"></ul></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
