@@ -145,6 +145,7 @@ function show(n){
   $("#count").textContent = `Passo ${n} de ${TOTAL}`;
   $("#back").disabled = n === 1;
   $("#next").textContent = n === TOTAL ? "Recomeçar" : "Continuar";
+  $("#next").classList.toggle("go-outline", n === TOTAL);
   if(n === 6) playChat();
   if(n >= 7) fillTuesday(); else resetTuesday();
   window.scrollTo({top:0,behavior:"instant"});
@@ -152,7 +153,6 @@ function show(n){
 
 $("#next").onclick = () => show(cur === TOTAL ? 1 : cur + 1);
 $("#back").onclick = () => show(cur - 1);
-$("#restart").onclick = () => show(1);
 
 document.addEventListener("keydown", e => {
   if(e.target.closest("input,textarea")) return;
